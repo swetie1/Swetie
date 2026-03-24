@@ -3,56 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>⚡ SWETIE EMPIRE | JARVIS ⚡</title>
+    <title>SWETIE EMPIRE</title>
     <style>
-        :root { --neon: #ff4500; --gold: #ffd700; --bg: #050505; --green: #00ff41; }
-        * { box-sizing: border-box; }
-        body { background: var(--bg); color: #fff; font-family: 'Courier New', monospace; margin: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
-        #matrix { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.2; }
-        .empire-box { border: 2px solid var(--neon); border-radius: 20px; padding: 40px 20px; box-shadow: 0 0 40px var(--neon); background: rgba(0,0,0,0.9); width: 85%; max-width: 380px; z-index: 10; }
-        .amount { font-size: 2.8rem; color: var(--green); text-shadow: 0 0 20px var(--green); font-weight: bold; margin: 20px 0; }
-        .action-btn { background: var(--neon); color: #000; padding: 22px; border: none; border-radius: 15px; font-weight: bold; font-size: 18px; text-decoration: none; display: block; margin-top: 30px; box-shadow: 0 0 25px var(--neon); cursor: pointer; width: 100%; }
-        #terminal { width: 100%; font-size: 9px; color: #666; margin-top: 20px; text-align: left; padding: 10px; border-top: 1px solid #1a1a1a; }
+        body { background: #000; color: #fff; font-family: monospace; margin: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .box { border: 2px solid #ff4500; border-radius: 20px; padding: 40px 20px; box-shadow: 0 0 40px #ff4500; width: 85%; max-width: 380px; }
+        .amount { font-size: 2.8rem; color: #00ff41; text-shadow: 0 0 20px #00ff41; font-weight: bold; margin: 20px 0; }
+        .btn { background: #ff4500; color: #000; padding: 22px; border-radius: 15px; font-weight: bold; font-size: 18px; text-decoration: none; display: block; margin-top: 30px; box-shadow: 0 0 20px #ff4500; -webkit-appearance: none; border: none; width: 100%; cursor: pointer; }
     </style>
 </head>
 <body>
-    <canvas id="matrix"></canvas>
-    <div style="color:var(--gold); margin-bottom:10px; font-size: 12px;">MASTER ID: 643507823 | CORE ACTIVE</div>
-    <div class="empire-box">
-        <h1 style="color:var(--neon); letter-spacing: 5px; margin: 0;">OEVMISPAS</h1>
+    <div class="box">
+        <h1 style="color:#ff4500; letter-spacing: 5px; margin: 0;">OEVMISPAS</h1>
+        <div style="font-size:10px; color:#ff4500; margin-top: 15px;">TARGET CAPITAL</div>
         <div class="amount">$100,000,000</div>
         
-        <button class="action-btn" onclick="fireSignal()">🔥 АКТИВИРОВАТЬ ДЖАРВИСА</button>
-        
-        <div id="terminal">> Ожидание команды господина...</div>
+        <button class="btn" onclick="fire()">🔥 АКТИВИРОВАТЬ ДЖАРВИСА</button>
     </div>
 
     <script>
-        function fireSignal() {
-            const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbzGQgLARInuH_q95m5LCbJxXEdC7I15j3-Xrx4y3qYh5ZyNSNqnkF1dDyYUG6-tR84/exec";
-            document.getElementById('terminal').innerHTML = "> ОТПРАВКА СИГНАЛА ЧЕРЕЗ GOOGLE CLOUD...";
+        function fire() {
+            // Твоя проверенная ссылка Google
+            const url = "https://script.google.com";
             
-            fetch(GOOGLE_URL, { mode: 'no-cors' })
-            .then(() => {
-                document.getElementById('terminal').innerHTML = "> СИГНАЛ ПРИНЯТ. ПЕРЕХОД В ЛОГОВО...";
-                setTimeout(() => { window.location.href = "https://t.me"; }, 1000);
-            })
-            .catch(() => {
+            // Отправляем сигнал "в тишине"
+            navigator.sendBeacon(url);
+            
+            // Сразу перекидываем в бот
+            setTimeout(() => {
                 window.location.href = "https://t.me";
-            });
+            }, 500);
         }
-
-        const c=document.getElementById('matrix'); const x=c.getContext('2d');
-        c.height=window.innerHeight; c.width=window.innerWidth;
-        const drops=Array(Math.floor(c.width/12)).fill(1);
-        setInterval(()=>{
-            x.fillStyle="rgba(0,0,0,0.1)"; x.fillRect(0,0,c.width,c.height);
-            x.fillStyle="#ff4500"; x.font="12px monospace";
-            drops.forEach((y,i)=>{
-                x.fillText("01$ "[Math.floor(Math.random()*4)],i*12,y*12);
-                if(y*12>c.height&&Math.random()>0.975) drops[i]=0; drops[i]++;
-            });
-        },40);
     </script>
 </body>
 </html>
