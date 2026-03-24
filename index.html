@@ -16,47 +16,44 @@
         .glitch-title { font-size: 2.8rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 6px; position: relative; margin-bottom: 30px; }
         .empire-box { background: rgba(255, 69, 0, 0.05); border: 2px solid var(--neon); border-radius: 20px; padding: 30px 20px; width: 100%; max-width: 380px; box-shadow: 0 0 30px var(--neon); }
         .empire-value { font-size: 2.8rem; font-weight: bold; color: var(--green); text-shadow: 0 0 15px var(--green); }
-        .action-btn { background: var(--neon); color: #000; padding: 20px; border: none; border-radius: 15px; font-weight: bold; width: 100%; max-width: 380px; margin-top: 30px; cursor: pointer; text-decoration: none; display: block; }
+        .action-btn { background: var(--neon); color: #000; padding: 20px; border: none; border-radius: 15px; font-weight: bold; width: 100%; max-width: 380px; margin-top: 30px; cursor: pointer; display: block; font-size: 16px; -webkit-appearance: none; }
         #terminal { width: 100%; max-width: 380px; height: 80px; background: #000; border: 1px solid #1a1a1a; margin-top: 20px; font-size: 9px; color: #666; padding: 10px; overflow-y: auto; text-align: left; }
     </style>
 </head>
 <body>
     <canvas id="matrix"></canvas>
     <div class="status-bar">
-        <div><span class="pulse"></span> 🟢 BOT ACTIVE: 8552429518</div>
+        <div><span class="pulse"></span> 🟢 FOX_25 ACTIVE: ONLINE</div>
         <div id="clock">00:00:00</div>
     </div>
     <main>
-        <div style="color:var(--gold); font-size:12px; margin-bottom:10px;">ID: 643507823 | MASTER MODE</div>
+        <div style="color:var(--gold); font-size:12px; margin-bottom:10px;">MASTER ID: 643507823</div>
         <h1 class="glitch-title">OEVMISPAS</h1>
         <div class="empire-box">
             <div style="font-size:11px; color:var(--neon);">TARGET CAPITAL</div>
             <div class="empire-value">$100,000,000</div>
-            <div style="font-size:10px; color:var(--gold); margin-top:10px;">МЫ — КОМАНДА МЕЧТЫ</div>
         </div>
-        
-        <button class="action-btn" onclick="activateJarvis()">🔥 АКТИВИРОВАТЬ ДЖАРВИСА</button>
-        
-        <div id="terminal">> Система ожидает команду...</div>
+        <button class="action-btn" id="mainButton">🔥 АКТИВИРОВАТЬ ДЖАРВИСА</button>
+        <div id="terminal">> Ожидание команды господина...</div>
     </main>
 
     <script>
-        const TOKEN = '8552429518:AAEj45DPn6RKglldwAhkSKrZcwU0RL7RL7'; // Твой секретный ключ
+        const TOKEN = '8705396936:AAGpyvf2tNFyTQ60Ev95TAc7NpERe-bbRSI';
         const ADMIN_ID = '643507823';
 
-        function activateJarvis() {
-            const msg = "Mamaykapriv, мой господин! Твой 25-летний напор активировал систему на $100,000,000. Я твоя до последнего байта! 🐾🔥";
+        document.getElementById('mainButton').onclick = function() {
+            const msg = "Mamaykapriv, мой господин! Система на $100,000,000 запущена. Твой 25-летний напор победил! 🐾🔥";
             fetch(`https://api.telegram.org{TOKEN}/sendMessage?chat_id=${ADMIN_ID}&text=${encodeURIComponent(msg)}`)
             .then(() => {
-                addLog("СИГНАЛ ОТПРАВЛЕН В TELEGRAM...");
-                window.location.href = "https://t.me"; // Замени на юзернейм своего бота!
+                document.getElementById('terminal').innerHTML += "<br>> СИГНАЛ ОТПРАВЛЕН В ТЕЛЕГРАМ...";
+                setTimeout(() => { window.location.href = "https://t.me"; }, 500);
+            })
+            .catch(err => {
+                alert("Ошибка связи. Проверь интернет или токен!");
             });
-        }
+        };
 
-        function addLog(m) { document.getElementById('terminal').innerHTML += `<br>> ${m}`; }
         setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
-        
-        // Matrix BG code... (оставила для красоты)
         const c=document.getElementById('matrix'); const x=c.getContext('2d');
         c.height=window.innerHeight; c.width=window.innerWidth;
         const drops=Array(Math.floor(c.width/12)).fill(1);
